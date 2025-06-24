@@ -16,8 +16,11 @@
     "@prisma/client": "^6.10.1",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
     "pg": "^8.16.2",
     "prisma": "^6.10.1"
   }
