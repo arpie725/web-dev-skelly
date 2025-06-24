@@ -2,6 +2,24 @@ import prisma from '../prismaClient.js';
 import bcrypt from 'bcryptjs';
 import { InvalidParamsError } from './errors.js';
 
+/** checks if the userId exists in the users database
+ * @param {number} userId
+ * @returns user
+ */
+async function userExists(userId) {
+  // interact with the database
+  try {
+    const user = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+    return user;
+  } catch (er) {
+    throw er;
+  }
+}
+
 /** checks if a username already exists in the users table
  * - ensures the username is trimmed
  * @param {string} username
@@ -44,4 +62,4 @@ async function validateUsernameAndPassword(username, password) {
   }
 }
 
-export { usernameExists, validateUsernameAndPassword };
+export { userExists, usernameExists, validateUsernameAndPassword };
