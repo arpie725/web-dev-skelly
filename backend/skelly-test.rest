@@ -3,6 +3,20 @@ POST http://localhost:1322/auth/register
 Content-Type: application/json
 
 {
-  "username": "usernam3",
-  "password": "passwor6"
+  "username": "Ryan",
+  "password": "pass"
 }
+
+### Login a user
+POST http://localhost:1322/auth/login
+Content-Type: application/json
+
+{
+  "username": "test",
+  "password": "pass"
+}
+
+
+### To test Google Auth login:
+# In browser type: http://localhost:1322/auth/google
+

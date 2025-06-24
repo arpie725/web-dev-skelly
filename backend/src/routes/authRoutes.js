@@ -6,13 +6,42 @@ import {
   usernameExists,
   validateUsernameAndPassword,
 } from '../utils/authHelpers.js';
-import { DuplicateEntryError, handleErrors } from '../utils/errors.js';
+import {
+  DuplicateEntryError,
+  handleErrors,
+  NotFoundError,
+  UnauthorizedError,
+} from '../utils/errors.js';
+import passport from 'passport';
+import '../middleware/passport.js';
 
 const router = express.Router();
 
+// redirect user to google for auth
+router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
+
+// handle callback from google
+router.get(
+  '/google/callback',
+  passport.authenticate('google', { session: false }),
+  (req, res) => {
+    const token = jwt.sign({ id: req.user.id }, process.env.JWT_SECRET, {
+      expiresIn: '24h',
+    });
+    // return the token
+    return res.status(201).json({
+      success: true,
+      message: `succesfully used google auth`,
+      data: {
+        token,
+      },
+    });
+  }
+);
+
 /** registers a new user
- * - checks if the username already exists in the db
- * - adds the new user into the db
+ * - checks if the username already exists in the database
+ * - adds the new user into the database
  * - creates a token for the new user
  * - returns username and token
  */
@@ -51,7 +80,48 @@ router.post('/register', async (req, res) => {
       },
     });
   } catch (er) {
-    // expected error
+    return handleErrors(er, res);
+  }
+});
+
+/** logs in an existing user
+ * - checks if the username exists in the database
+ * - compares the password with the one in the database
+ * - returns the username and token
+ */
+router.post('/login', async (req, res) => {
+  const { username: rawUsername, password } = req.body;
+  // interacting with the database
+  try {
+    // validate username / password
+    const { username } = await validateUsernameAndPassword(
+      rawUsername,
+      password
+    );
+    // check that the username exists in the database
+    const user = await usernameExists(username);
+    if (!user) {
+      throw new NotFoundError('User not found');
+    }
+    // compare passwords: (user inputted password, hashed password)
+    const passwordIsValid = bcrypt.compareSync(password, user.password);
+    if (!passwordIsValid) {
+      throw new UnauthorizedError('Incorrect password');
+    }
+    // create the token
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      expiresIn: '24h',
+    });
+    // return the token to the client
+    res.status(200).json({
+      success: true,
+      message: 'Succesfully logged in',
+      data: {
+        username,
+        token: token,
+      },
+    });
+  } catch (er) {
     return handleErrors(er, res);
   }
 });
