@@ -54,4 +54,15 @@ router.delete('/', async (req, res) => {
   }
 });
 
+/** verifies the token
+ * - logic: if middleware executes to this endpoint, then the token was verified
+ */
+router.post('/verify-token', async (req, res) => {
+  // return the username
+  return res.status(200).json({
+    success: true,
+    message: 'Verified the token',
+  });
+});
+
 export default router;
