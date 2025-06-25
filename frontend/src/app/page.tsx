@@ -8,10 +8,6 @@ import { verifyToken, loginUser } from '@/api/auth';
 export default function HomePage() {
   const router = useRouter();
 
-  
-
- 
-
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {

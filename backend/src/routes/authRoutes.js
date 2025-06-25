@@ -16,6 +16,7 @@ import passport from 'passport';
 import '../middleware/passport.js';
 
 const router = express.Router();
+const frontendUrl = process.env.FRONTEND_URL;
 
 // redirect user to google for auth
 router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
@@ -23,19 +24,15 @@ router.get('/google', passport.authenticate('google', { scope: ['profile'] }));
 // handle callback from google
 router.get(
   '/google/callback',
-  passport.authenticate('google', { session: false }),
+  passport.authenticate('google', {
+    failureRedirect: `${frontendUrl}/auth`,
+    session: false,
+  }),
   (req, res) => {
     const token = jwt.sign({ id: req.user.id }, process.env.JWT_SECRET, {
       expiresIn: '24h',
     });
-    // return the token
-    return res.status(201).json({
-      success: true,
-      message: `succesfully used google auth`,
-      data: {
-        token,
-      },
-    });
+    res.redirect(`${frontendUrl}/oauth-redirect?token=${token}`);
   }
 );
 
@@ -113,7 +110,7 @@ router.post('/login', async (req, res) => {
       expiresIn: '24h',
     });
     // return the token to the client
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: 'Succesfully logged in',
       data: {
