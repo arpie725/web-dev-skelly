@@ -86,7 +86,7 @@ async function verifyToken(token) {
   try {
     // make api call
     const res = await axios.post(
-      `${apiUrl}/auth/verify-token`,
+      `${apiUrl}/user/verify-token`,
       {},
       {
         headers: {
