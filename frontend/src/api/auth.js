@@ -82,4 +82,23 @@ async function registerUser(username, password) {
   }
 }
 
-export { loginUser, registerUser };
+async function verifyToken(token) {
+  try {
+    // make api call
+    const res = await axios.post(
+      `${apiUrl}/auth/verify-token`,
+      {},
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+    return { valid: true, user: res.data.user };
+  } catch (er) {
+    console.log('token could not be verified');
+    return { valid: false, user: null };
+  }
+}
+
+export { loginUser, registerUser, verifyToken };
