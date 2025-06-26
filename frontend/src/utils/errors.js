@@ -30,9 +30,24 @@ class DuplicateEntryError extends Error {
   }
 }
 
+/** checks if the error is a known error
+ * @param {*} er
+ * @returns bool
+ */
+function knownErrors(er) {
+  // extract the error name form axios error
+  return (
+    er instanceof NotFoundError ||
+    er instanceof UnauthorizedError ||
+    er instanceof InvalidParamsError ||
+    er instanceof DuplicateEntryError
+  );
+}
+
 export {
   NotFoundError,
   UnauthorizedError,
   InvalidParamsError,
   DuplicateEntryError,
+  knownErrors,
 };

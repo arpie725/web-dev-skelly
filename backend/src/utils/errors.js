@@ -9,7 +9,7 @@ class NotFoundError extends Error {
 class UnauthorizedError extends Error {
   constructor(message) {
     super(message);
-    this.name = 'UnauthorziedError';
+    this.name = 'UnauthorizedError';
     this.statusCode = 403;
   }
 }
