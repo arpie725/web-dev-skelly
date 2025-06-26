@@ -26,7 +26,7 @@ async function userExists(userId) {
  * @returns user
  */
 async function usernameExists(username) {
-  const trimmedUsername = username?.trim();
+  const trimmedUsername = username?.trim().toLowerCase();
   //interact with the database
   try {
     const user = await prisma.user.findUnique({
