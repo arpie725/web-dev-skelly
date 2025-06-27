@@ -6,6 +6,11 @@ import { useState, useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { motion, AnimatePresence } from 'framer-motion';
 
+/*
+Navbar to navigate the app
+- Built with different screen sizes in mind (sm, md lg)
+*/
+
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
