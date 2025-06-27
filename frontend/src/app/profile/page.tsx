@@ -2,19 +2,17 @@
 
 import Navbar from '@/components/common/NavBar';
 
-const DashboardPage = () => {
+const ProfilePage = () => {
   return (
     <div className='bg-background'>
       <Navbar />
       <section className='mt-10'>
         <div className='container mx-auto border border-blue-500'>
-          <h1 className='text-xl text-pink-500 sm:text-violet-500 md:text-yellow-500 lg:text-white'>
-            Dashboard Page
-          </h1>
+          <h1 className='text-xl'>Profile Page</h1>
         </div>
       </section>
     </div>
   );
 };
 
-export default DashboardPage;
+export default ProfilePage;
