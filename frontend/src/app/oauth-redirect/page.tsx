@@ -3,6 +3,12 @@
 import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 
+/*
+Intermediate page used after Google Auth
+- Stores the token to localStorage
+- Immediately routes to the dashboard page
+*/
+
 export default function OAuthRedirect() {
   const router = useRouter();
   const searchParams = useSearchParams();

@@ -1,0 +1,18 @@
+Starter for Full Stack Web Dev:
+
+Frontend:
+- Next.js
+- TailwindCSS
+- Framer Motion
+
+Backend:
+- Node.js
+- Express
+- JWT
+
+Database:
+- PostgreSQL
+- Prisma ORM
+
+
+TODO: list out all the setup that still needs to be done... (ex. what should be inside .env / .env.local files)

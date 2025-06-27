@@ -14,6 +14,13 @@ import {
 } from '@/utils/errors';
 import { error } from 'console';
 
+/*
+Allows user to login / register
+- Calls the 'loginUser' and 'registerUser' helpers from 'api/auth' to make API call to server
+- Handles any errors (input validation, user already exists, incorrect password, etc.)
+- Offers ability to sign in with Google
+*/
+
 const AuthPage = () => {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
