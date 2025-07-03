@@ -1,5 +1,8 @@
 Starter for Full Stack Web Dev:
 
+Motivation: Creating an easy and convient way to start building full stack web apps.
+Most web apps will need a database, some sort of user login/register (with Google Auth), a frontend, and a server to create API's.
+
 Frontend:
 - Next.js
 - TailwindCSS
