@@ -1,0 +1,30 @@
+### Register a user
+POST http://localhost:1322/auth/register
+Content-Type: application/json
+
+{
+  "username": "Ryan",
+  "password": "pass"
+}
+
+### Login a user
+POST http://localhost:1322/auth/login
+Content-Type: application/json
+
+{
+  "username": "Ryan",
+  "password": "pass"
+}
+
+
+### To test Google Auth login:
+# In browser type: http://localhost:1322/auth/google
+
+### Get username 
+GET http://localhost:1322/user
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzUwNzQyNTQ2LCJleHAiOjE3NTA4Mjg5NDZ9.dEcMJuAoNhDtL-rqTCQFOpTV_dvVrGT8xRGWeNORQiA
+
+
+### Delete a user
+DELETE http://localhost:1322/user
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiaWF0IjoxNzUwNzQyNTQ2LCJleHAiOjE3NTA4Mjg5NDZ9.dEcMJuAoNhDtL-rqTCQFOpTV_dvVrGT8xRGWeNORQiA
