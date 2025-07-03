@@ -15,4 +15,39 @@ Database:
 - Prisma ORM
 
 
-TODO: list out all the setup that still needs to be done... (ex. what should be inside .env / .env.local files)
+Frontend and Backend folders need .env files to keep API's and other sensitive information off of github
+
+Backend:
+- navigate to /backend
+- create .env file by running 'touch .env'
+- open the file and paste the following:
+
+DATABASE_URL="[url_can_be_found_on_supabase]"
+JWT_SECRET='[___]'
+PORT=[___]
+SALT=[___]
+GOOGLE_CLIENT_ID="[google_auth_platform_clients_client_id]"
+GOOGLE_CLIENT_SECRET="[if_forgot_create_new_one]"
+FRONTEND_URL='[___]'
+
+- run 'npm install'
+- run 'npm run dev'
+
+Frontend:
+- navigate to /frontend
+- create .env.local file by running 'touch .env.local'
+- open the file and paste the following:
+
+NEXT_PUBLIC_API_URL=[___]
+
+- run 'npm install'
+- run 'npm run dev'
+
+Database:
+- navigate to /backend
+- run 'npx prisma migrate deploy'
+
+
+For local database development:
+- npx prisma dev
+
